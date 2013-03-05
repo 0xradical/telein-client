@@ -4,22 +4,16 @@ require 'curb'
 module Telein
   class Client
 
-    def carrier_code_for(phone)
+    def carrier_code_for(value)
       return 999 unless Telein.api_key
 
-      if phone && (matching = phone.match(Telein::Util::BRAZILIAN_PHONE_FORMAT))
+      phone = Telein::Util::Phone.new(value)
 
-        # apenas celulares de são paulo tem o 9 extra
-        if matching[:code] != '11' && (not matching[:sp_cell_phone_prefix].empty?)
-          return 100
-        end
-
-        formatted_phone = "#{matching[:code]}#{matching[:number].delete('-')}"
-
+      if phone.valid?
         Telein.servers.each do |server|
           begin
             curl = Curl::Easy.new do |easy|
-              easy.url = server.query_url_for(formatted_phone)
+              easy.url = server.query_url_for(phone.to_telein_s)
             end
 
             # request no telein
@@ -29,7 +23,7 @@ module Telein
             response = curl.body_str
 
             # parsing do response (carrier#number)
-            carrier_code, phone_number = response.split('#')
+            carrier_code, _ = response.split('#')
 
             return carrier_code.to_i
           rescue

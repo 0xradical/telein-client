@@ -14,7 +14,7 @@ end
 
 require 'telein/version'
 require 'telein/carrier_codes'
-require 'telein/util/brazilian_phone_format'
+require 'telein/util/phone'
 require 'telein/server'
 require 'telein/client'
 
