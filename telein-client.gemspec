@@ -5,8 +5,9 @@ require File.expand_path('../lib/telein/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = "telein-client"
   gem.version       = Telein::VERSION
-  gem.summary       = %q{TODO: Summary}
-  gem.description   = %q{TODO: Description}
+  gem.summary       = %q{Client to access Telein API in Ruby}
+  gem.description   = %q{The 'telein-client' gem allows the access for
+the Telein API in Ruby.}
   gem.license       = "MIT"
   gem.authors       = ["Thiago Brandão Damasceno"]
   gem.email         = "thiagobrandam@gmail.com"
