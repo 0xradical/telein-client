@@ -8,7 +8,7 @@ describe Telein::Server do
     endpoint       = 'consultanumero1.telein.com.br'
     phone          = '1234345656'
 
-    server = Telein::Server.new(endpoint)
+    server = described_class.new(endpoint)
 
     server.query_url_for(phone).should == 'http://consultanumero1.telein.com.br/sistema/consulta_numero.php?numero=1234345656&chave=my_api_key'
   end

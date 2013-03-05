@@ -19,7 +19,7 @@ describe Telein::Client do
       stub_request(:get,server.query_url_for('1294345656')).to_return(:body => '41#1294345656')
     end
 
-    client = Telein::Client.new
+    client = described_class.new
     client.carrier_code_for('(00) 0000-0000').should == 999
     client.carrier_code_for('(12) 3434-5656').should == 999
     client.carrier_code_for('(12) 9434-5656').should == 999
@@ -32,8 +32,7 @@ describe Telein::Client do
       stub_request(:get,server.query_url_for('1294345656')).to_return(:body => '41#1294345656')
     end
 
-    client = Telein::Client.new
-
+    client = described_class.new
     client.carrier_code_for('(00) 0000-0000').should == 100
     client.carrier_code_for('(12) 3434-5656').should == 98
     client.carrier_code_for('(12) 9434-5656').should == 41
@@ -46,8 +45,7 @@ describe Telein::Client do
       stub_request(:get,server.query_url_for('1294345656')).to_timeout
     end
 
-    client = Telein::Client.new
-
+    client = described_class.new
     client.carrier_code_for('(00) 0000-0000').should == 100
     client.carrier_code_for('(12) 3434-5656').should == 101
     client.carrier_code_for('(12) 9434-5656').should == 101
