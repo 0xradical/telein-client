@@ -1,1 +1,4 @@
---markup rdoc --title "Telein::Client Documentation" --protected
+--title "Telein::Client Documentation"
+--protected
+--markup-provider=redcarpet
+--markup=markdown

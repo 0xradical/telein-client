@@ -1,5 +1,7 @@
 # encoding: utf-8
 module Telein
+  # The mapping of carrier codes and meanings , in pt-BR
+  # @todo Maybe provide in en-US format
   CARRIER_CODES = {
     12  => "CTBC",
     14  => "Brasil Telecom",

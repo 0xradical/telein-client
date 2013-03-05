@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler', '~> 1.0'
   gem.add_development_dependency 'rake', '~> 0.9'
+  gem.add_development_dependency 'redcarpet'
   gem.add_development_dependency 'rspec', '~> 2.13.0'
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
   gem.add_development_dependency 'webmock', '~> 1.11'
