@@ -25,7 +25,7 @@ describe Telein::Util::Phone do
     phone.number.should == '994345656'
     phone.area_code.should == '21'
     expect(phone.has_extra_digit?).to be_true
-    expect(phone.valid?).to be_false
+    expect(phone.valid?).to be_true
   end
 
   it 'returns format for telein purposes' do

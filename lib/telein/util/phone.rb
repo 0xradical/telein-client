@@ -66,11 +66,7 @@ module Telein
       # @return [Boolean] whether phone is valid or invalid
       def valid?
         if self.area_code && self.number
-          if self.has_extra_digit? && self.area_code != '11'
-            false
-          else
-            true
-          end
+          true
         else
           false
         end
