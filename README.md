@@ -7,21 +7,27 @@ the Telein API in Ruby.
 
 Add this line to your application's Gemfile:
 
-    gem 'telein-client', :require => 'telein'
+```ruby
+gem 'telein-client', :require => 'telein'
+```
 
 Or install it yourself as:
 
-    $ gem install telein-client
+```
+$ gem install telein-client
+```
 
 ## Usage
 
-    require 'telein'
+```ruby
+require 'telein'
 
-    # if you do not set this properly, it's going to return 999 responses
-    Telein.api_key = 'your_api_key'
+# if you do not set this properly, it's going to return 999 responses
+Telein.api_key = 'your_api_key'
 
-    client = Telein::Client.new
-    client.carrier_code_for('(12) 3434-5656') # => 41
+client = Telein::Client.new
+client.carrier_code_for('(12) 3434-5656') # => 41
+```
 
 ## About Telein
 
