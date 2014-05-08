@@ -12,7 +12,9 @@ module Telein
 
       # General format of a Brazilian phone.
       # An area_code and a number that may contain and extra 9
-      FORMAT = /\A\(?(?<area_code>[1-9][0-9])\)?\s*(?<number>(?<extra_digit>9?)[2-9]\d{3}\-?\d{4})\Z/
+      # Valid area codes are ruled by Resolution nº 263 from Anatel:
+      # http://legislacao.anatel.gov.br/resolucoes/16-2001/383-resolucao-263
+      FORMAT = /\A\(?(?<area_code>[14689][1-9]|[23][12478]|[357][1345]|77|79)\)?\s*(?<number>(((?<extra_digit>9?)\d)|[2-9])\d{3}\-?\d{4})\Z/
 
       # @param value [String] a string containing phone information
       def initialize(value)
@@ -56,12 +58,8 @@ module Telein
       end
 
       # Checks if phone is valid
-      # This is a loosen check, in the sense that it accepts
-      # a wide range of probably invalid phones, like
-      # (99) 9999-9999 but the specs for area codes in Brazil
-      # are also loosen, allowing the existence of such numbers in the future.
-      # Also, for phones in the 11 area, the method may return false
-      # positives, since only cellphones have that extra digit.
+      # For phones in the 1[1-9] and 2[1-9] areas, the method may return false
+      # positives, since only cellphones have that extra digit as of Q2 of 2014.
       #
       # @return [Boolean] whether phone is valid or invalid
       def valid?
