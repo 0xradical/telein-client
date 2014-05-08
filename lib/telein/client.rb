@@ -51,6 +51,8 @@ module Telein
             # response parsing (carrier#number)
             carrier_code, _ = response.split('#')
 
+            return 101 if carrier_code.to_i == 0
+
             return carrier_code.to_i
           rescue
             next
