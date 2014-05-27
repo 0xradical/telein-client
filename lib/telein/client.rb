@@ -26,14 +26,16 @@ module Telein
   #    client.carrier_code_for('(12) 3434-5656') # => '41'
   class Client
 
-    # Queries the Telein servers for the carrier code of value
-    #
+    # Queries the Telein servers for the carrier code and corrected
+    #   phone number of value.
     # @param value [String] A string supposedly containing phone information
-    # @return [Integer] The carrier code for value
-    def carrier_code_for(value)
-      return 999 unless Telein.api_key
-
+    # @return [Array<Integer, String>] A pair with carrier code for value
+    #    and corrected phone number.
+    private
+    def raw_query(value)
       phone = Telein::Util::Phone.new(value)
+
+      return [999, value] unless Telein.api_key
 
       if phone.valid?
         Telein.servers.each do |server|
@@ -49,23 +51,41 @@ module Telein
             response = curl.body_str
 
             # response parsing (carrier#number)
-            carrier_code, _ = response.split('#')
+            carrier_code, number = response.split('#')
 
-            return 101 if carrier_code.to_i == 0
+            return [101, number] if carrier_code.to_i == 0
 
-            return carrier_code.to_i
+            return [carrier_code.to_i, number]
           rescue
             next
           end
         end
 
         # all servers down
-        return 101
+        return [101, phone.to_telein_s]
       else
         # invalid phone
-        return 100
+        return [100, value]
       end
     end
+    # Wraps the query to the Telein servers for the carrier code and
+    #   corrected phone number of value on a dictionary.
+    # @param value [String] A string supposedly containing phone information
+    # @return [Hash] with :carrier_code as the carrier code
+    #    and :number as the corrected phone number.
+    public
+    def query(value)
+      carrier_code, number = raw_query(value)
+      return { :carrier_code => carrier_code, :number => number }
+    end
 
+    # Filters the query to the Telein servers so that it only returns
+    #   the carrier code.
+    # @deprecated Use {#query} for greater functionality.
+    # @param value [String] A string supposedly containing phone information
+    # @return [Integer] The carrier code for value
+    def carrier_code_for(value)
+      return query(value)[:carrier_code]
+    end
   end
 end
