@@ -27,7 +27,7 @@ module Telein
     # @see Telein::Client#carrier_code_for
     def query_url_for(phone)
       url = URI::HTTP.build({:host  => self.endpoint,
-                             :path  => '/sistema/consulta_numero.php',
+                             :path  => '/sistema/consulta_resumida.php',
                              :query => URI::encode_www_form({:numero => phone,:chave => Telein.api_key})})
       url.to_s
     end
