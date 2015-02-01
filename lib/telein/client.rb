@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'curb'
+require 'net/http'
 
 module Telein
   # Class used to query Telein servers for carrier codes
@@ -40,15 +40,7 @@ module Telein
       if phone.valid?
         Telein.servers.each do |server|
           begin
-            curl = Curl::Easy.new do |easy|
-              easy.url = server.query_url_for(phone.to_telein_s)
-            end
-
-            # client request
-            curl.http_get
-
-            # telein response
-            response = curl.body_str
+            response = Net::HTTP.get URI(server.query_url_for(phone.to_telein_s))
 
             # response parsing (carrier#number)
             carrier_code, number = response.split('#')
