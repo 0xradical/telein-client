@@ -19,8 +19,6 @@ the Telein API in Ruby.}
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'curb', '~> 0.8'
-
   gem.add_development_dependency 'bundler', '~> 1.0'
   gem.add_development_dependency 'rake', '~> 0.9'
   gem.add_development_dependency 'redcarpet'
