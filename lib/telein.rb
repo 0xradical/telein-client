@@ -31,6 +31,6 @@ require 'telein/server'
 require 'telein/client'
 
 # @see Telein::Server#initialize
-Telein.register_server(Telein::Server.new('consultanumero1.telein.com.br'))
-Telein.register_server(Telein::Server.new('consultanumero2.telein.com.br'))
-Telein.register_server(Telein::Server.new('consultanumero3.telein.com.br'))
+Telein.register_server(Telein::Server.new('consultaoperadora1.telein.com.br'))
+Telein.register_server(Telein::Server.new('consultaoperadora2.telein.com.br'))
+Telein.register_server(Telein::Server.new('consultaoperadora3.telein.com.br'))
